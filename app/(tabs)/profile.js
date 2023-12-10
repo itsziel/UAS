@@ -30,7 +30,7 @@ const Profile = () => {
         />
         {/* User Name */}
         <Heading level={2} mt={10} mb={10} fontWeight="bold" color="$white">
-          REFKI JOETA KANADA
+          REFKI JOETA K
         </Heading>
         <Text color="$cyan" fontWeight="bold" mt={-15} mb={15}>Sistem Informasi - 2021</Text>
         {/* Events and Certificates */}

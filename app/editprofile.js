@@ -22,10 +22,10 @@ const Editprofile = () => {
         />
         {/* Teks di bawah gambar */}
         <Text textAlign="center" color="$black" mb={30} fontWeight="bold" size="xl">
-          Complete Your Profile
+          Selesaikan Profilmu
         </Text>
         <Text textAlign="center" color="$black" mb={30} size="x" mt={-30}>
-          It will help us to know more about you!
+          Ini akan membantu kami mengetahui anda!
         </Text>
         <Input variant="outline" size="x" mb="$4">
           <InputSlot pl="$3">
