@@ -9,7 +9,7 @@ const Sertifikat = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 15, backgroundColor: pressedEventCardId ? "#8B0000" : "#8B0000", marginTop: 31 }}>
+      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 25, backgroundColor: pressedEventCardId ? "#B80000" : "#B80000", marginTop: 20 }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity onPress={() => router.replace("/home")}>
             <Ionicons name="arrow-back" size={25} color="white" />
