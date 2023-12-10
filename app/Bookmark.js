@@ -11,7 +11,7 @@ const Bookmark = () => {
     {
       id: 1,
       title: "EVENT 1",
-      description: "This is the description for Event 1.",
+      description: "Lomba desain Event 1.",
       image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDpet-RwLSaLXEh-pwc_APyX-zCK9OVokJmdqUXSis2wwevSRnZqjMpn2rL38YeGNbvuQzV3OwvHF2jpHirvl4jVc-49BbnCU-5I82tCXWyI7mpm4cskV2e898wTFR6jlfJRJCcNZjJO-xDn3HpxFNA4xzAL2h_nNX6AjSb8qHB96hABeNj3dd4bCs/s2048/Lomba-Poster-Hari-Pancasila-2048x2048.jpg",
     },
     {
@@ -23,7 +23,7 @@ const Bookmark = () => {
     {
       id: 3,
       title: "EVENT 3",
-      description: "This is the description for Event 3.",
+      description: "Mobile Smart Office EXPburn.",
       image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUDzTO0lM_6c94tdW4kKhXrIKvexEtSpYGtpPRASq6c7OFL_ANfZV8aAf9AKe0a_06LLrrhgooz9jj2dQj0X-rj-X0PGRd0hiaUKKxJrHtm8jYEmcdSvbeexegzwLQwunNEcNM3AT30sYUxgm3495axhwnIoBt5Q6osgcQaVcJDUJMsakfeLEJjtKb/s803/Screenshot_312.png",
     },
     {
