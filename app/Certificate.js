@@ -11,11 +11,11 @@ const Certificate = () => {
 
   const validateUser = () => {
     setIsPressed(true); 
-    router.replace('/Beasiswa')
+    router.push('/Beasiswa')
   };
 
   const handleBack = () => {
-   router.replace('/Event')
+   router.push('/Event')
   };
   const item = slides[1];
 

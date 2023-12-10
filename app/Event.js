@@ -11,11 +11,11 @@ const Event = () => {
 
     const validateUser = () => {
         setIsPressed(true); 
-        router.replace('/Certificate')
+        router.push('/Certificate')
       };
 
       const handleBack = () => {
-       router.replace('/LandingPage')
+       router.push('/LandingPage')
       };
 
   const item = slides[0];
