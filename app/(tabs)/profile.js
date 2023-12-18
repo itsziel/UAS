@@ -5,6 +5,7 @@ import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 
+
 const Profile = () => {
   const [eventsCount, setEventsCount] = useState(7);
   const [certificatesCount, setCertificatesCount] = useState(6);
