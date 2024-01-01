@@ -22,6 +22,7 @@ const StackLayout = () => {
         <Stack.Screen name="editprofile" options={noHead} />
         <Stack.Screen name="detailsertif" options={noHead} />
         <Stack.Screen name="Register" options={noHead} />
+        <Stack.Screen name="exploreevent" options={noHead} />
       </Stack>
     </GluestackUIProvider>
   );
