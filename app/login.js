@@ -4,6 +4,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { EyeIcon, EyeOffIcon } from 'lucide-react-native';
 import { loginUser } from "../app/AuthAuction";
 import { router } from 'expo-router';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const Login = () => {
@@ -114,17 +115,19 @@ const Login = () => {
         >
           <ButtonText>Login</ButtonText>
         </Button>
-          <Text size="sm" color="$black" mt={"$4"}>
-            Don't have an account?
-          </Text>
-          <Button
-            title="Register"
+        <TouchableOpacity
             type="text"
             padding={"$3"}
             onPress={() => {
-              router.replace('/Register');
-            }}
-          />
+              router.push('/Register');
+            }}> 
+          <Text size="sm"  mt={"$4"} px={"$2"}>
+            Don't have an account?
+            <Text color={"$primary300"} pl={"$4"} >
+               Register
+            </Text>
+          </Text>
+        </TouchableOpacity>
       </Box>
 
       {}

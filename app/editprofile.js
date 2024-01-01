@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, Box, Image, Input, InputIcon, InputSlot, InputField, Button, ButtonText } from "@gluestack-ui/themed";
+import { View, Text, Box, Image, Input, InputIcon, InputSlot, InputField, Button, ButtonText } from "@gluestack-ui/themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
 
@@ -9,7 +9,7 @@ const Editprofile = () => {
   }
 
   return (
-    <ScrollView flex={1} bg="$white" >
+    <View flex={1} bg="$white" >
       <Box p={"$12"} flexDirection="col" justifyContent="center" mt={-50}>
         <Image
           source={require("../assets/edit.png")}
@@ -87,7 +87,7 @@ const Editprofile = () => {
           <ButtonText>Save</ButtonText>
         </Button>
       </Box>
-    </ScrollView>
+    </View>
   );
 };
 

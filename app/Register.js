@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Image, Input, InputIcon, InputSlot, InputField, Button, ButtonText, Alert, AlertText, Modal, ModalBackdrop, } from "@gluestack-ui/themed";
+import { Box, Image, Input, InputIcon, InputSlot, InputField, Button, ButtonText, Alert, AlertText, Modal, ModalBackdrop, Fab } from "@gluestack-ui/themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { registerUser } from './AuthAuction';
+import BackFAB from './ButtonBack';
 
 
 const Register = ({ router }) => {
@@ -55,6 +56,7 @@ const Register = ({ router }) => {
       flexDirection="col"
       justifyContent="center"
       >
+        <BackFAB/>
         <Image
           source={require("../assets/logoproject.png")}
           h={200}

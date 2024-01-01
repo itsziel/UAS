@@ -4,6 +4,7 @@ import { Header } from "../../components";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { clearStorage, getData, storeData } from "../utils/localStorage";
 
 const Profile = () => {
   const [eventsCount, setEventsCount] = useState(7);
@@ -15,6 +16,48 @@ const Profile = () => {
     { platform: "Linktree", icon: "link", link: "https://linktr.ee/your_linktree"},
 
   ]);
+  
+  const [profile, setProfile] = useState(null);
+
+  const getUserData = () => {
+    getData("user").then((res) => {
+      const data = res;
+      if (data) {
+        console.log("isi data", data);
+        setProfile(data);
+      } else {
+        // navigation.replace('Login');
+      }
+    });
+  };
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      getUserData();
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [navigation]);
+
+  const onSubmit = (profile) => {
+    if (profile) {
+      FIREBASE.auth()
+        .signOut()
+        .then(() => {
+          // Sign-out successful.
+          clearStorage();
+          navigation.replace("MainApp");
+        })
+        .catch((error) => {
+          // An error happened.
+          alert(error);
+        });
+    } else {
+      navigation.replace("Login");
+    }
+  };
 
   return (
     <ScrollView flex={1} bg="#B80000">
@@ -29,9 +72,9 @@ const Profile = () => {
           mt={30}
         />
         {/* User Name */}
-        <Heading level={2} mt={10} mb={10} fontWeight="bold" color="$white">
-          REFKI JOETA KANADA
-        </Heading>
+        <Text level={2} mt={10} mb={10} fontWeight="bold" color="$white">
+          {profile?.nama}
+        </Text>
         <Text color="$cyan" fontWeight="bold" mt={-15} mb={15}>Sistem Informasi - 2021</Text>
         {/* Events and Certificates */}
         <Box mt={1}  ml={20} flexDirection="row" justifyContent="center">
