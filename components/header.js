@@ -5,8 +5,25 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "expo-router";
 import { router } from "expo-router";
+import firebase from "../app/config/FIREBASE";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Header = ({ title, withBack = false }) => {
+  const logout = async () => {
+    firebase.auth().signOut().then(() => {
+        clearUserData();
+      }).catch((error) => {
+        console.error(error);
+      });
+  };
+  const clearUserData = async () => {
+    try {
+      await AsyncStorage.clear();
+      router.replace("login");
+    } catch (e) {
+      console.error(e);
+    }
+  };
   const trueGray900 = "#B80000";
   const navigation = useNavigation();
   return (
@@ -38,7 +55,7 @@ const Header = ({ title, withBack = false }) => {
             )}
             <Heading color={"$white"}>{title}</Heading>
           </HStack>
-          <TouchableOpacity onPress={() => router.replace('/')}>
+          <TouchableOpacity onPress={() => logout() }>
             <Ionicons name="log-out-outline" size={25} color="white" />
           </TouchableOpacity>
         </HStack>

@@ -1,35 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Image, Text, Input, InputIcon, InputSlot, InputField, Button, ButtonText, Alert, AlertText, Modal, ModalBackdrop} from "@gluestack-ui/themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { EyeIcon, EyeOffIcon } from 'lucide-react-native';
 import { loginUser } from "../app/AuthAuction";
 import { router } from 'expo-router';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import firebase from "./config/FIREBASE";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getAuth } from "firebase/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("")
-  const [showPassword, setShowPassword] = useState(false);;
-
+  const [alertMessage, setAlertMessage] = useState("");
+  const auth = getAuth();
+  useEffect(() => {
+    getUser();
+  }, []);
+  const getUser = async () => {
+    try {
+      // Ambil data dari AsyncStorage
+      const userData = await AsyncStorage.getItem("user-data");
+      if (userData !== null) {
+        router.replace("/welcome");
+      } else {
+        setIsLoading(false);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
   const toggleAlert = (message) => {
     setShowAlert(!showAlert);
     setAlertMessage(message);
   };
 
-
   const login = () => {
-    if (email && password) {
-      loginUser(email, password)
-        .then((user) => {
-          router.replace('/welcome')
-        })
-        .catch((error) => {
-          console.log("Error", error.message);
-          toggleAlert(error.message);
-        });
+    firebase.auth().signInWithEmailAndPassword(email, password).then((userCredential) => {
+      // const user = userCredential.user
+      saveUserData(email, password, userCredential);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  };
+  const saveUserData = async (email, password, credential) => {
+    const userData = { email, password, credential };
+    try {
+      // Menyimpan data ke AsyncStorage
+      await AsyncStorage.setItem("user-data", JSON.stringify(userData));
+      // Diarahkan ke Home
+      router.replace("/welcome")
+    } catch (error) {
+      console.error(error);
     }
   };
 

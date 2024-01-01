@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Box, Image, Input, InputIcon, InputSlot, InputField, Button, ButtonText, Alert, AlertText, Modal, ModalBackdrop, Fab } from "@gluestack-ui/themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { registerUser } from './AuthAuction';
 import BackFAB from './ButtonBack';
+import firebase from "./config/FIREBASE";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from 'expo-router';
 
 
-const Register = ({ router }) => {
+
+const Register = () => {
   const [nama, setNama] = useState("");
   const [email, setEmail] = useState("");
   const [nim, setNim] = useState("");
@@ -18,29 +21,32 @@ const Register = ({ router }) => {
     setAlertMessage(message);
   };
 
-  const onRegister = async () => {
-    if (nama && email && nim && password) {
-      const data = {
-        nama: nama,
-        email: email,
-        nim: nim,
-        status: "user",
-      };
-
-      console.log(data);
-
-      try {
-        const user = await registerUser(data, password);
-        router.replace('/welcome');
-      } catch (error) {
-        console.log("Error", error.message);
-        toggleAlert(error.message);
-      }
-    } else {
-      console.log("Error", "Data tidak lengkap");
-      toggleAlert("Data tidak lengkap");
+  const onRegister = async () => { firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
+    saveUserData(email, password,nama, nim);
+  }).catch((error) => {
+    console.error(error);
+  });
+  const saveUserData = async (email, password, name,credential) => {
+    const userData = { email, password,name, credential };
+    try {
+      await AsyncStorage.setItem("user-data", JSON.stringify(userData));
+      router.replace('/welcome');
+    } catch (error) {
+      console.error(error);
     }
-  };
+  }
+};
+
+
+//   const saveUserData = async (email, password, nama, nim) => {
+//     const userData = { email, password,nama, nim };
+//     try {
+//       await AsyncStorage.setItem("user-data", JSON.stringify(userData));
+//       router.replace("/home");
+//     } catch (error) {
+//       console.error(error);
+//   }
+// };
 
   // const handleState = () => {
   //   setShowPassword((showState) => {

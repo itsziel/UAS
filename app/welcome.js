@@ -22,14 +22,14 @@ const Welcome = (navigation) => {
     });
   };
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      getUserData();
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, [navigation]);
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener("focus", () => {
+  //     getUserData();
+  //   });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, [navigation]);
 
 
   return (

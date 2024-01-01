@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toggleAboutMe, showFullAboutMe, ScrollView, Divider, Box, View, Image, Text, Center, Heading } from "@gluestack-ui/themed";
 import { Header } from "../../components";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
-import { clearStorage, getData, storeData } from "../utils/localStorage";
 
 const Profile = () => {
   const [eventsCount, setEventsCount] = useState(7);
@@ -19,43 +19,24 @@ const Profile = () => {
   
   const [profile, setProfile] = useState(null);
 
-  const getUserData = () => {
-    getData("user").then((res) => {
-      const data = res;
-      if (data) {
-        console.log("isi data", data);
-        setProfile(data);
-      } else {
-        // navigation.replace('Login');
-      }
-    });
-  };
-
+  const [userData, setUserData] = useState({});
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      getUserData();
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [navigation]);
-
-  const onSubmit = (profile) => {
-    if (profile) {
-      FIREBASE.auth()
-        .signOut()
-        .then(() => {
-          // Sign-out successful.
-          clearStorage();
-          navigation.replace("MainApp");
-        })
-        .catch((error) => {
-          // An error happened.
-          alert(error);
-        });
-    } else {
-      navigation.replace("Login");
+    getUserData();
+  }, []);
+  const getUserData = async () => {
+    try {
+      // Ambil data dari AsyncStorage
+      const value = await AsyncStorage.getItem("user-data");
+      if (value !== null) {
+        const valueObject = JSON.parse(value);
+        // Update value state bernama "data"
+        setUserData(valueObject);
+        // console.log(valueObject);
+        // Fetch Data
+        // fetchData(valueObject);
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -73,7 +54,7 @@ const Profile = () => {
         />
         {/* User Name */}
         <Text level={2} mt={10} mb={10} fontWeight="bold" color="$white">
-          {profile?.nama}
+          {userData.nama}
         </Text>
         <Text color="$cyan" fontWeight="bold" mt={-15} mb={15}>Sistem Informasi - 2021</Text>
         {/* Events and Certificates */}
