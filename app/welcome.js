@@ -1,12 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { VStack, Box, Text, Image, Button, ButtonText} from "@gluestack-ui/themed";
 import { router } from "expo-router";
+import { getData } from './utils/localStorage';
 
-const Welcome = () => {
-  const [name, setName] = useState('Zidan')
+
+const Welcome = (navigation) => {
   const validateUser = () => {
-    router.replace('/home')
+    router.push('/home')
   }
+  const [profile, setProfile] = useState(null);
+
+  const getUserData = () => {
+    getData("user").then((res) => {
+      const data = res;
+      if (data) {
+        console.log("isi data", data);
+        setProfile(data);
+      } else {
+        // navigation.replace('Login');
+      }
+    });
+  };
+
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener("focus", () => {
+  //     getUserData();
+  //   });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, [navigation]);
+
+
   return (
     <>
       <Box 
@@ -30,7 +55,7 @@ const Welcome = () => {
             bold={true}
             mb={5}
           >
-            Welcome, {name}
+            Welcome, {profile?.nama}
           </Text>
           <Text 
           justifyContent="center">

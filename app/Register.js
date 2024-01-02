@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import { Box, Alert, FormControl, Text, Modal, ModalBackdrop, AlertText} from "@gluestack-ui/themed";
-import { Input } from "../app/input";
-import { Button } from "../app/button"
-import { registerUser } from "../app/AuthAuction";
-import BackFAB from "../app/BackFAB";
+import React, { useState } from 'react';
+import { Box, Image, Input, InputIcon, InputSlot, InputField, Button, ButtonText, Alert, AlertText, Modal, ModalBackdrop, Fab } from "@gluestack-ui/themed";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import BackFAB from './ButtonBack';
+import firebase from "./config/FIREBASE";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from 'expo-router';
 
-const Register = ({ router }) => {
+
+
+const Register = () => {
   const [nama, setNama] = useState("");
   const [email, setEmail] = useState("");
-  const [nohp, setNohp] = useState("");
+  const [nim, setNim] = useState("");
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -18,104 +21,159 @@ const Register = ({ router }) => {
     setAlertMessage(message);
   };
 
-  const onRegister = async () => {
-    if (nama && email && nohp && password) {
-      const data = {
-        nama: nama,
-        email: email,
-        nohp: nohp,
-        status: "user",
-      };
-
-      console.log(data);
-
-      try {
-        const user = await registerUser(data, password);
-        router.replace("/welcome");
-      } catch (error) {
-        console.log("Error", error.message);
-        toggleAlert(error.message);
-      }
-    } else {
-      console.log("Error", "Data tidak lengkap");
-      toggleAlert("Data tidak lengkap");
+  const onRegister = async () => { firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
+    saveUserData(email, password,nama, nim);
+  }).catch((error) => {
+    console.error(error);
+  });
+  const saveUserData = async (email, password, name,credential) => {
+    const userData = { email, password,name, credential };
+    try {
+      await AsyncStorage.setItem("user-data", JSON.stringify(userData));
+      router.replace('/welcome');
+    } catch (error) {
+      console.error(error);
     }
-  };
+  }
+};
+
+
+//   const saveUserData = async (email, password, nama, nim) => {
+//     const userData = { email, password,nama, nim };
+//     try {
+//       await AsyncStorage.setItem("user-data", JSON.stringify(userData));
+//       router.replace("/home");
+//     } catch (error) {
+//       console.error(error);
+//   }
+// };
+
+  // const handleState = () => {
+  //   setShowPassword((showState) => {
+  //     return !showState
+  //   })
+
+
 
   return (
-    <Box flex={1} backgroundColor="$blue400" justifyContent="center">
-      <BackFAB />
-      <Box
-        shadowColor="$black"
-        shadowOffset={{ width: 0, height: 2 }}
-        shadowOpacity={"$25"}
-        shadowRadius={"$3.5"}
-        elevation={"$5"}
-        backgroundColor="$white"
-        borderRadius={"$md"}
-        marginTop={"$10"}
-        marginHorizontal={"$6"}
-        p={"$5"}
+    <>
+      <Box 
+      p={"$12"} 
+      flexDirection="col"
+      justifyContent="center"
       >
-        <Text size="3xl" color="$black" fontWeight="bold">
-          Hello~
-        </Text>
-        <Text size="sm" color="$black" my={"$1"}>
-          Sign up to continue!
-        </Text>
-        <FormControl>
-          <Input
-            label="Nama"
-            value={nama}
-            onChangeText={(nama) => setNama(nama)}
-            height={"$10"}
-          />
-          <Input
-            label="Email"
-            value={email}
-            onChangeText={(email) => setEmail(email)}
-            height={"$10"}
-          />
-          <Input
-            label="No. Handphone"
-            keyboardType="phone-pad"
-            value={nohp}
-            onChangeText={(nohp) => setNohp(nohp)}
-            height={"$10"}
-          />
-          <Input
-            label="Password"
-            secureTextEntry
-            value={password}
-            onChangeText={(password) => setPassword(password)}
-            height={"$10"}
-          />
-        </FormControl>
-        <Box flexDirection="column" my={"$5"}>
-          <Button
-            title="Register"
-            type="text"
-            icon="submit"
-            padding={"$3"}
-            fontSize={"$md"}
-            onPress={() => {
-              onRegister();
-            }}
-          />
-        </Box>
+        <BackFAB/>
+        <Image
+          source={require("../assets/logoproject.png")}
+          h={200}
+          w={"$full"}
+          mt={30}
+          mb={30}
+          alt="Logo"
+          role="img"
+        />
+        <Input
+        variant="outline"
+        size="x"
+        mb="$4"
+        >
+          <InputSlot pl="$3">
+            <InputIcon>
+              <Ionicons
+                name={"person"}
+                size={20}
+                color={"black"}
+              />
+            </InputIcon>
+          </InputSlot>
+          <InputField 
+          placeholder="Nama Lengkap"
+          onChangeText={(nama) => setNama(nama)} 
+          value={nama} />
+        </Input>
+        <Input
+        variant="outline"
+        size="x"
+        mb="$4"
+        >
+          <InputSlot pl="$3">
+            <InputIcon>
+              <Ionicons
+                name={"person"}
+                size={20}
+                color={"black"}
+              />
+            </InputIcon>
+          </InputSlot>
+          <InputField 
+          placeholder="Email"
+          onChangeText={(email) => setEmail(email)} 
+          value={email} />
+        </Input>
+        <Input
+        variant="outline"
+        size="x"
+        mb="$4"
+        >
+          <InputSlot pl="$3">
+            <InputIcon>
+              <Ionicons
+                name={"person"}
+                size={20}
+                color={"black"}
+              />
+            </InputIcon>
+          </InputSlot>
+          <InputField 
+          placeholder="Nomor Induk Mahasiswa"
+          onChangeText={(nim) => setNim(nim)} 
+          value={nim} />
+        </Input>
+        <Input
+        variant="outline"
+        size="x"
+        mb="$4"
+        >
+          <InputSlot pl="$3">
+            <InputIcon>
+                <Ionicons
+                  name={"lock-closed"}
+                  size={20}
+                  color={"black"}
+              />
+            </InputIcon>
+          </InputSlot>
+          <InputField 
+          placeholder="Password"
+          onChangeText={(password) => setPassword(password)} 
+          value={password} />
+        </Input>
+        <Button
+          size="x"
+          variant="solid"
+          mx={20}
+          mt={20}
+          bg="$red800"
+          sx={{ ":active": { bg: "$error800" } }}
+          onPress={() => onRegister()}
+        >
+          <ButtonText>Register</ButtonText>
+        </Button>
+          
       </Box>
 
-      {/* show Alert */}
+      {}
       {showAlert && (
         <Modal isOpen={showAlert} onClose={() => toggleAlert()}>
           <ModalBackdrop />
           <Alert mx="$4" action="error" variant="solid">
-            <AlertText fontWeight="$bold">Error!</AlertText>
+            <AlertText fontWeight="$bold">Buset!</AlertText>
             <AlertText>{alertMessage}</AlertText>
           </Alert>
         </Modal>
       )}
-    </Box>
+     
+    </>
   );
 };
 
