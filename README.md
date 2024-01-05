@@ -3,6 +3,5 @@ KampusXpert adalah Sistem informasi manajemen layanan berbentuk aplikasi berbasi
 
 ## Tampilan
 ![alt text](https://github.com/itsziel/UAS/blob/main/sc1.png)
-![alt text](https://github.com/itsziel/UAS/blob/main/sc2.png)
-![alt text](https://github.com/itsziel/UAS/blob/main/sc4.png)
+
 
