@@ -52,8 +52,8 @@ const Certificate = () => {
                     borderColor={'white.500'}
                     >
                     <HStack space={2}>
-                        <ChevronLeftIcon size={5} color={'black'} mt={1} pl={4}/>
-                        <Text fontSize={'lg'} pr={3}> Back</Text>
+                        <ChevronLeftIcon size={5} color={'white'} mt={1} pl={4}/>
+                        <Text fontSize={'lg'} pr={3} color={'white'}> Back</Text>
                     </HStack>
                     </Button>
                     <Divider orientation="vertical" bg="gray.200"/>
@@ -63,8 +63,8 @@ const Certificate = () => {
                     h={60}
                     onPress={validateUser} >
                         <HStack space={2}>
-                        <Text fontSize={'lg'} bold pl={3}>Next</Text>
-                        <ChevronRightIcon size={5} color={'black'} mt={1} pr={4}/>
+                        <Text fontSize={'lg'} bold pl={3} color={'white'}>Next</Text>
+                        <ChevronRightIcon size={5} color={'white'} mt={1} pr={4}/>
                         </HStack>
                     </Button>
                 </HStack>
