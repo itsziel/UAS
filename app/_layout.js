@@ -20,7 +20,7 @@ const StackLayout = () => {
         <Stack.Screen name="Bookmark" options={noHead} />
         <Stack.Screen name="sertifikat" options={noHead} />
         <Stack.Screen name="editprofile" options={noHead} />
-        <Stack.Screen name="detailsertif" options={noHead} />
+        <Stack.Screen name="detailsertif" options={noHead}/>
       </Stack>
     </GluestackUIProvider>
   );
