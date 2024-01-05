@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toggleAboutMe, showFullAboutMe, ScrollView, Divider, Box, View, Image, Text, Center, Heading } from "@gluestack-ui/themed";
 import { Header } from "../../components";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import 'firebase/storage';
+import {firebase} from './config';
 
 const Profile = () => {
   const [eventsCount, setEventsCount] = useState(7);
-  const [certificatesCount, setCertificatesCount] = useState(6);
+  const [certificatesCount, setCertificatesCount] = useState(9);
   const [aboutMe, setAboutMe] = useState("Hai! Saya adalah [Nama Anda], seorang penggemar teknologi yang bersemangat dan pencinta inovasi di dunia IT. 🚀💻🌐 Berbasis di [Lokasi Anda], saya adalah seorang [Jabatan atau Spesialisasi IT Anda] dengan pengalaman yang luas dalam [Aplikasi Pengembangan Perangkat Lunak, Keamanan Jaringan, dll.]. Dengan setiap proyek yang saya hadapi, tujuan saya adalah tidak hanya memecahkan masalah, tetapi juga menciptakan solusi yang efisien dan relevan.🔍 Saya senang menjelajahi tren terkini dalam dunia teknologi, dari kecerdasan buatan (AI) hingga pengembangan aplikasi berbasis blockchain. Saya percaya bahwa teknologi memiliki potensi luar biasa untuk membawa perubahan positif, dan saya berkomitmen untuk terus berkontribusi pada evolusi IT.💡 Selain itu, saya suka berbagi pengetahuan dan pengalaman saya melalui platform edukasi dan sosial. Mendidik dan menginspirasi generasi berikutnya dari para penggiat IT adalah sesuatu yang saya anggap penting.");
   const [socialMedia, setSocialMedia] = useState([
     { platform: "Instagram", icon: "logo-instagram", link: "https://www.instagram.com/your_instagram" },
@@ -15,6 +17,37 @@ const Profile = () => {
     { platform: "Linktree", icon: "link", link: "https://linktr.ee/your_linktree"},
 
   ]);
+
+  // Fungsi untuk menghitung jumlah file gambar dalam Firebase Storage
+  const countImagesInStorage = async () => {
+    try {
+      const storageRef = firebase.storage().ref();
+      const listRef = storageRef.root;
+
+      const listResult = await listRef.listAll();
+      const images = listResult.items.filter((item) =>
+        item.name.toLowerCase().endsWith('.jpg') ||
+        item.name.toLowerCase().endsWith('.jpeg') ||
+        item.name.toLowerCase().endsWith('.png') ||
+        item.name.toLowerCase().endsWith('.gif') ||
+        item.name.toLowerCase().endsWith('.bmp')
+      );
+
+      const imageCount = images.length;
+      console.log(`Jumlah file gambar dalam storage: ${imageCount}`);
+
+      return imageCount;
+    } catch (error) {
+      console.error('Error counting images:', error);
+      return 0;
+    }
+};
+
+  useEffect(() => {
+    countImagesInStorage().then((imageCount) => {
+      setCertificatesCount(imageCount);
+    });
+  }, []);
 
   return (
     <ScrollView flex={1} bg="#B80000">
