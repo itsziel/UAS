@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toggleAboutMe, showFullAboutMe, ScrollView, Divider, Box, View, Image, Text, Center, Heading } from "@gluestack-ui/themed";
 import { Header } from "../../components";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 
 const Profile = () => {
@@ -16,29 +15,6 @@ const Profile = () => {
     { platform: "Linktree", icon: "link", link: "https://linktr.ee/your_linktree"},
 
   ]);
-  
-  const [profile, setProfile] = useState(null);
-
-  const [userData, setUserData] = useState({});
-  useEffect(() => {
-    getUserData();
-  }, []);
-  const getUserData = async () => {
-    try {
-      // Ambil data dari AsyncStorage
-      const value = await AsyncStorage.getItem("user-data");
-      if (value !== null) {
-        const valueObject = JSON.parse(value);
-        // Update value state bernama "data"
-        setUserData(valueObject);
-        // console.log(valueObject);
-        // Fetch Data
-        // fetchData(valueObject);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   return (
     <ScrollView flex={1} bg="#B80000">
@@ -53,9 +29,9 @@ const Profile = () => {
           mt={30}
         />
         {/* User Name */}
-        <Text level={2} mt={10} mb={10} fontWeight="bold" color="$white">
-          {userData.nama}
-        </Text>
+        <Heading level={2} mt={10} mb={10} fontWeight="bold" color="$white">
+          REFKI JOETA K
+        </Heading>
         <Text color="$cyan" fontWeight="bold" mt={-15} mb={15}>Sistem Informasi - 2021</Text>
         {/* Events and Certificates */}
         <Box mt={1}  ml={20} flexDirection="row" justifyContent="center">
