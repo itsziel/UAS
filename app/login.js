@@ -25,7 +25,7 @@ const Login = () => {
       if (userData !== null) {
         router.replace("/welcome");
       } else {
-        setIsLoading(false);
+       
       }
     } catch (e) {
       console.error(e);
@@ -37,9 +37,9 @@ const Login = () => {
   };
 
   const login = () => {
-    firebase.auth().signInWithEmailAndPassword(email, password).then((userCredential) => {
+    firebase.auth().signInWithEmailAndPassword(email, password).then((nama, nim) => {
       // const user = userCredential.user
-      saveUserData(email, password, userCredential);
+      saveUserData(email, password, nama, nim);
     })
     .catch((error) => {
       console.error(error);

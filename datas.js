@@ -63,7 +63,7 @@ const datas = [
       "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUDzTO0lM_6c94tdW4kKhXrIKvexEtSpYGtpPRASq6c7OFL_ANfZV8aAf9AKe0a_06LLrrhgooz9jj2dQj0X-rj-X0PGRd0hiaUKKxJrHtm8jYEmcdSvbeexegzwLQwunNEcNM3AT30sYUxgm3495axhwnIoBt5Q6osgcQaVcJDUJMsakfeLEJjtKb/s803/Screenshot_312.png",
     content: "Mahasiswa berstatus aktif\nMemiliki Email Kampus\nMaksimal Semester 7\nMahasiswa dari Kampus Indonesia",
     button: "Selengkapnya",
-    fee: "Free Proposal" ,
+    fee: "Free" ,
   },
   {
     id: 5,

@@ -1,59 +1,77 @@
-import React, { useState } from "react";
-import { TouchableOpacity, } from "react-native";
-import { Heading, ScrollView, Text, View, Image, Button, ButtonText,FlatList, Box  } from "@gluestack-ui/themed";
+import React, { useEffect, useState } from "react";
+import { FlatList, TouchableOpacity, View, Text, Image } from "react-native";
+import { Heading, Box } from "@gluestack-ui/themed";
 import { Ionicons } from "@expo/vector-icons";
-import { router, Link } from "expo-router";
-import datas from "../datas";
+import { router } from "expo-router";
+import firebase from "./config/FIREBASE";
 
 const Explore = () => {
-  const [pressedEventCardId] = useState(null);
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const fetchData = async () => {
+    const dataRef = firebase.database().ref("events");
+      dataRef.once("value").then((snapshot) => {
+        const dataValue = snapshot.val();
+        if (dataValue != null) {
+          const snapshotArr = Object.entries(dataValue).map((item) => {
+            return {
+              id: item[0],
+              ...item[1],
+            };
+          });
+          setEvents(snapshotArr);
+        }
+        // setIsLoading(false); // Set isLoading to false when data fetching is complete
+      }).catch((e) => {
+        console.error(e);
+      });
+  };
+
   const renderitem = ({ item }) => {
     return (
-      <Link
-        href={{
-          pathname: "/news-detail",
-          params: item,
-        }}
-        asChild
+      <TouchableOpacity
+        onPress={() =>
+          router.push({pathname:"/news-detail", params:{id:item.id}})
+        }
+        activeOpacity={0.5}
       >
-        <TouchableOpacity activeOpacity={0.5}>
-          <Box
-            p={"$4"}
-            borderBottomColor={"$coolGray300"}
-            borderBottomWidth={1}
-            flexDirection="row"
-            flex={1}
-          >
-            <Box flex={1} mr={"$4"}>
-              <Image
-                source={{ uri: item.image }}
-                w="$full"
-                h="$full"
-                alt="Image Data"
-                role="img"
-              />
-            </Box>
-            <Box flex={1.8}>
-              <Text fontSize={"$sm"}>{item.date}</Text>
-              <Heading lineHeight={"$md"} fontSize={"$md"}>
-                {item.title}
-              </Heading>
-            </Box>
+        <Box
+          p={"$4"}
+          borderBottomColor={"$coolGray300"}
+          borderBottomWidth={1}
+          flexDirection="row"
+          flex={1}
+        >
+          <Box flex={1} mr={"$4"}>
+            <Image
+              source={{ uri: item.image }}
+              style={{ width: "100%", height: "100%" }}
+              alt="Image Data"
+              role="img"
+            />
           </Box>
-        </TouchableOpacity>
-      </Link>
+          <Box flex={1.8}>
+            <Text fontSize={"$sm"}>{item.date}</Text>
+            <Heading lineHeight={"$md"} fontSize={"$md"}>
+              {item.title}
+            </Heading>
+          </Box>
+        </Box>
+      </TouchableOpacity>
     );
   };
 
-
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 20, backgroundColor: pressedEventCardId ? "#B80000" : "#B80000", marginTop: 20 }}>
+      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 20, backgroundColor: "#B80000", marginTop: 20 }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity onPress={() => router.replace("/event")}>
             <Ionicons name="arrow-back" size={25} color="white" />
           </TouchableOpacity>
-          <Text style={{ textTransform: "none", fontSize: 20, marginLeft: 10, color:"white" }}>Explore Event</Text>
+          <Text style={{ textTransform: "none", fontSize: 20, marginLeft: 10, color: "white" }}>Explore Event</Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity style={{ marginLeft: 10 }}>
@@ -62,7 +80,7 @@ const Explore = () => {
         </View>
       </View>
       <FlatList
-        data={datas.slice(0, 8)}
+        data={events}
         renderItem={renderitem}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
