@@ -77,12 +77,11 @@ const NewsDetail = ({ event }) => {
       <Box flex={1} justifyContent="center" alignItems="center">
         {test.map((index) => (
           <Box key={index.id}>
-            <Text>
-              dan ini id: {index.title}
-            </Text>
-            <Text mb={"$1"}>{index.date}</Text>
+            <Text>Fee: {index.fee}</Text>
           </Box>
         ))}
+
+
       </Box>
 
     )}

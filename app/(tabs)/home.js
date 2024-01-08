@@ -4,8 +4,33 @@ import datas from "../../datas";
 import { Link } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import firebase from "./config/FIREBASE";
 
 const Home = () => {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const dataRef = firebase.database().ref("events");
+      dataRef.once("value").then((snapshot) => {
+        const dataValue = snapshot.val();
+        if (dataValue != null) {
+          const snapshotArr = Object.entries(dataValue).map((item) => {
+            return {
+              id: item[0],
+              ...item[1],
+            };
+          });
+          setEvents(snapshotArr);
+        }
+        // setIsLoading(false); // Set isLoading to false when data fetching is complete
+      }).catch((e) => {
+        console.error(e);
+      });
+  };
   const renderitem = ({ item }) => {
     return (
       <Link
@@ -99,7 +124,7 @@ const Home = () => {
       </Box>
 
       <FlatList
-        data={datas.slice(0, 8)}
+        data={events}
         renderItem={renderitem}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}

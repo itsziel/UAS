@@ -3,6 +3,7 @@ import { FlatList, TouchableOpacity, View, Text, Image } from "react-native";
 import { Heading, Box } from "@gluestack-ui/themed";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { useNavigation } from '@react-navigation/native';
 import firebase from "./config/FIREBASE";
 
 const Explore = () => {
@@ -11,6 +12,7 @@ const Explore = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
   const fetchData = async () => {
     const dataRef = firebase.database().ref("events");
       dataRef.once("value").then((snapshot) => {
