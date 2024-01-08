@@ -1,10 +1,10 @@
 import { VStack, Image, Text, Center, Heading } from "@gluestack-ui/themed";
 import { Header } from "../../components";
 
-const Notifikasi = () => {
+const Todolist = () => {
   return (
     <>
-      <Header title={"Notifikasi"} />
+      <Header title={"Todolist"} />
       <Center flex={1}>
         <VStack space={2} alignItems="center">
           <Image
@@ -19,4 +19,4 @@ const Notifikasi = () => {
   );
 };
 
-export default Notifikasi;
+export default Todolist;
