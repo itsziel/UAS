@@ -17,11 +17,8 @@ const TabsLayout = () => {
             case "event":
               iconName = "calendar-outline";
               break;
-            case "collaboration":
-              iconName = "chatbox-outline";
-              break;
-            case "notifikasi":
-              iconName = "notifications-outline";
+            case "todolist":
+              iconName = "reader-outline";
               break;
             case "profile":
               iconName = "person-circle-outline";
@@ -50,8 +47,7 @@ const TabsLayout = () => {
     >
       <Tabs.Screen name="home" options={{ title: "Home", ...noHead }} />
       <Tabs.Screen name="event" options={{ title: "Event", ...noHead }} />
-      <Tabs.Screen name="collaboration" options={{ title: "Collab", ...noHead }} />
-      <Tabs.Screen name="notifikasi" options={{ title: "Notifikasi", ...noHead }} />
+      <Tabs.Screen name="todolist" options={{ title: "Todolist", ...noHead }} />
       <Tabs.Screen name="profile" options={{ title: "Profile", ...noHead }} />
     </Tabs>
   );
