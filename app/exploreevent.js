@@ -3,16 +3,15 @@ import { FlatList, TouchableOpacity, View, Text, Image } from "react-native";
 import { Heading, Box } from "@gluestack-ui/themed";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { useNavigation } from '@react-navigation/native';
 import firebase from "./config/FIREBASE";
 
 const Explore = () => {
   const [events, setEvents] = useState([]);
+  console.log(events)
 
   useEffect(() => {
     fetchData();
   }, []);
-
   const fetchData = async () => {
     const dataRef = firebase.database().ref("events");
       dataRef.once("value").then((snapshot) => {
@@ -36,7 +35,7 @@ const Explore = () => {
     return (
       <TouchableOpacity
         onPress={() =>
-          router.push({pathname:"/news-detail", params:{id:item.id}})
+          router.push({pathname:"/news-detail", params:{id:item.id, link:item.button, content:item.content, date:item.date, fee:item.fee, image:item.image, location:item.location, procurement:item.procurement, time:item.time, title:item.title}})
         }
         activeOpacity={0.5}
       >

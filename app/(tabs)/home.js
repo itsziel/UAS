@@ -1,10 +1,11 @@
+import React, { useEffect, useState } from "react";
 import { Heading, FlatList, Box, Text, Image } from "@gluestack-ui/themed";
 import { Header } from "../../components";
 import datas from "../../datas";
 import { Link } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import firebase from "./config/FIREBASE";
+import firebase from "../config/FIREBASE";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
