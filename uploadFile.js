@@ -1,5 +1,16 @@
+// -	Mengimport fungsi ref, uploadBytesResumable, dan getDownloadURL dari modul firebase/storage.
+//-	Mengimport objek storage dari modul konfigurasi Firebase (diasumsikan berada di dalam file config.js).
+
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage } from './config'; // pastikan untuk mengganti dengan lokasi yang tepat dari konfigurasi Firebase Anda
+
+// -	Membuat fungsi UploadFile yang menerima tiga parameter: blobFile, fileName, dan isUploadCompleted.
+// -	Memeriksa apakah blobFile tidak bernilai null atau undefined. Jika null, maka fungsi dihentikan.
+// -	Membuat referensi ke storage Firebase menggunakan ref(storage, 'myDocs/' + fileName).
+// -	Memulai proses upload dengan uploadBytesResumable yang mengambil referensi storage dan file blob yang akan diunggah
+//-	Menggunakan on untuk memantau perubahan status pengunggahan (misalnya, 'state_changed').
+//-	Jika terjadi kesalahan, log pesan kesalahan dan memberikan umpan balik ke isUploadCompleted(false).
+//-	ika pengunggahan berhasil, mendapatkan URL unduhan dengan getDownloadURL dan memberikan umpan balik ke isUploadCompleted(true).
 
 const UploadFile = async (blobFile, fileName, isUploadCompleted) => {
   if (!blobFile) return;
