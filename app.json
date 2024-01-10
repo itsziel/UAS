@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "KampusXpert",
+    "slug": "KampusXpert",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/KampusXpert.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.project.campusxpert",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/KampusXpert.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "scheme": "my-scheme",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "22703991-fff0-4cfb-9b34-0395273275da"
+      }
+    }
+  }
+}

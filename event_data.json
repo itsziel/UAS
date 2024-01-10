@@ -1,0 +1,40 @@
+{
+    "events": {
+      "event1": {
+        "title": "Lomba Desain Poster Tingkat Nasional Hari Lahir Pancasila - ITENAS 2023",
+        "date": "09 Oktober 2023",
+        "procurement": "ITENAS",
+        "time": "Tuesday, 4:00PM - 9:00PM",
+        "location": "Summit Grand Hall",
+        "content": "Mahasiswa berstatus aktif\nMemiliki Email Kampus\nMaksimal Semester 7\nMahasiswa dari Kampus Indonesia",
+        "button": "Selengkapnya",
+        "image": "https://firebasestorage.googleapis.com/v0/b/kampusxpert-897b4.appspot.com/o/Lomba-Poster-Hari-Pancasila-2048x2048.jpg?alt=media&token=e10a2b55-3cb7-4952-ab98-3816813d4f85",
+        "fee": "Free"
+      },
+      "event2": {
+        "id": "2023-10-20-13-00-00-456789",
+        "title": "Lomba Esai HIMA Akuntansi UKDC",
+        "date": "20 Oktober 2023",
+        "procurement": "Universitas Katolik Darma Cendika",
+        "time": "Friday, 1:00PM - 5:00PM",
+        "location": "Gala Convention Center",
+        "content": "Mahasiswa berstatus aktif\nMemiliki Email Kampus\nMaksimal Semester 7\nMahasiswa dari Kampus Indonesia",
+        "button": "Selengkapnya",
+        "image": "https://firebasestorage.googleapis.com/v0/b/kampusxpert-897b4.appspot.com/o/Screenshot_312.jpg?alt=media&token=9e4969ea-8866-464d-aa6f-e67606fbcbcc",
+        "fee": "Siswa SMA : Rp. 85.000\nMahasiswa : Rp. 110.000"
+      },
+      "event3": {
+        "id": "2023-10-20-13-00-00-456789",
+        "title": "Lomba Karya Tulis Ilmiah ( LKTI ) Mahasiswa Tingkat Nasional - VOSICO 2023",
+        "date": "03 November 2023",
+        "procurement": "Universitas Negeri Malang",
+        "time": "Wednesday, 2:00PM - 7:00PM",
+        "location": "Metro Nexus Expo",
+        "content": "Mahasiswa aktif Perguruan Tinggi Negeri/Swasta\nSatu tim maksimal 2 orang dan berasal dari universitas yang sama\nEsai tidak mengandung plagiarisme dan belum pernah dipublikasikan",
+        "button": "Selengkapnya",
+        
+        "fee": "Free"
+      }
+    }
+  }
+  

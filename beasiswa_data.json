@@ -1,0 +1,40 @@
+{
+    "beasiswa": {
+      "beasiswa1": {
+        "title": "Beasiswa BCA Finance Peduli 2023",
+        "date": "1 Juni - 9 Juli 2023",
+        "procurement": "BCA Finance",
+        "content": "Pendaftaran dapat dilakukan di halaman resmi PT. BCA Finance (Hati hati penipuan)",
+        "image": "https://firebasestorage.googleapis.com/v0/b/kampusxpert-897b4.appspot.com/o/Lomba-Poster-Hari-Pancasila-2048x2048.jpg?alt=media&token=e10a2b55-3cb7-4952-ab98-3816813d4f85"
+      },
+      "beasiswa2": {
+        "title": "Beasiswa Mizan 2023",
+        "date": "29 Maret 2023",
+        "procurement": "Mizan",
+        "content": "Diperuntukan bagi mahasiswa yang tengah menyelesaikan studi akhir penulisan : skripsi, tesis, atau disertasi",
+        "image": "https://firebasestorage.googleapis.com/v0/b/kampusxpert-897b4.appspot.com/o/Lomba-Poster-Hari-Pancasila-2048x2048.jpg?alt=media&token=e10a2b55-3cb7-4952-ab98-3816813d4f85"
+      },
+      "beasiswa3": {
+        "title": "Beasiswa IDCloudHost",
+        "date": "14 Februari - 20 Juni 2023",
+        "procurement": "id CloudHost",
+        "content": "Pembiayaan penuh\nDapatkan pendidikan S1 Telkom University dengan pembiayaan penuh hingga lulus",
+        "image": "https://firebasestorage.googleapis.com/v0/b/kampusxpert-897b4.appspot.com/o/Lomba-Poster-Hari-Pancasila-2048x2048.jpg?alt=media&token=e10a2b55-3cb7-4952-ab98-3816813d4f85"
+      },
+      "beasiswa4": {
+        "title": "Bestro S1 2023",
+        "date": "5 Juni- 5 Juli 2023",
+        "procurement": "Petrokimia Gresik",
+        "content": "(Hati hati penipuan)",
+        "image": "https://firebasestorage.googleapis.com/v0/b/kampusxpert-897b4.appspot.com/o/Lomba-Poster-Hari-Pancasila-2048x2048.jpg?alt=media&token=e10a2b55-3cb7-4952-ab98-3816813d4f85"
+      },
+      "beasiswa5": {
+        "title": "Beasiswa Pertamina Sobat Bumi 2023",
+        "date": "15 Maret 2023",
+        "procurement": "Pertamina",
+        "content": "Beasiswa Reguler, Beasiswa Afirmasi, Beasiswa Vokasi",
+        "image": "https://firebasestorage.googleapis.com/v0/b/kampusxpert-897b4.appspot.com/o/Lomba-Poster-Hari-Pancasila-2048x2048.jpg?alt=media&token=e10a2b55-3cb7-4952-ab98-3816813d4f85"
+      }
+    }
+  }
+  
