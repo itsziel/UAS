@@ -1,3 +1,5 @@
+//-	Mengimpor React dan beberapa hooks dan komponen dari berbagai pustaka
+//-	Mengimpor komponen-komponen dari Gluestack UI, React Native, Expo Vector Icons, dan AsyncStorage
 import React, { useState, useEffect } from "react";
 import {
   toggleAboutMe,
@@ -17,6 +19,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
+//-	Menginisialisasi state menggunakan hook useState untuk menyimpan informasi seperti jumlah acara, jumlah sertifikat, tentang saya, media sosial, nama pengguna, dan NIM pengguna
 const Profile = () => {
   const [eventsCount, setEventsCount] = useState(7);
   const [certificatesCount, setCertificatesCount] = useState(6);
@@ -32,10 +36,13 @@ const Profile = () => {
   const [userName, setUserName] = useState("");
   const [userNIM, setUserNIM] = useState("");
 
+
+  //-	Menggunakan useEffect untuk memanggil fungsi getUserData saat komponen pertama kali dimuat
   useEffect(() => {
     getUserData();
   }, []);
 
+  //-	Fungsi asinkron untuk mengambil data pengguna dari penyimpanan lokal dan mengupdate state userName dan userNIM dengan nilai yang ditemukan
   const getUserData = async () => {
     try {
       const userData = await AsyncStorage.getItem("user-data");
@@ -49,11 +56,13 @@ const Profile = () => {
     }
   };
 
+  //-	Mengembalikan JSX yang mewakili tata letak UI dari halaman profil
   return (
     <ScrollView flex={1} bg="#B80000">
       <Header title={"Profile"} />
       <Center p={4}>
         {/* Profile Photo */}
+    //-	Menampilkan gambar profil pengguna menggunakan komponen Image
         <Image
           source={{
             uri: "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png",
@@ -64,6 +73,7 @@ const Profile = () => {
           mt={30}
         />
         {/* User Name */}
+            //-	Menampilkan nama pengguna dan NIM pengguna menggunakan komponen Heading dan Text
         <Heading level={2} mt={10} mb={10} fontWeight="bold" color="$white">
           {userName}
         </Heading>
@@ -79,6 +89,8 @@ const Profile = () => {
             <Text color="$white">Events</Text>
           </Box>
           <Divider orientation="vertical" bg="$white" h={40} mr={5} ml={5} />
+          
+          //-	Menampilkan jumlah sertifikat menggunakan komponen Box dan Text
           <Box alignItems="center" ml={10}>
             <Text color="$white" fontWeight="bold">
               {certificatesCount}
