@@ -1,5 +1,5 @@
 import React, { useState, TouchableOpacity } from "react-native";
-import { Heading, FlexBox, Box, Text, Image, Button, ButtonText, VStack, HStack} from "@gluestack-ui/themed";
+import { Heading, FlexBox, Box, Text, Image, Button, ButtonText, VStack, HStack, Pressable} from "@gluestack-ui/themed";
 import { Header } from "../../components";
 import datas from "../../datas";
 import { Link, router } from "expo-router";
@@ -52,28 +52,13 @@ const Event = () => {
                 maxWidth="100%"
         >
           <HStack justifyContent="space-between">
-                    
-            <Box 
-            bg={"$white"}
-            px={"$6"}
-            py={"$3"}
-            rounded={"$full"}>
-                        
-              <Text color={"#B80000"}>UPCOMING</Text>       
-                        
-            </Box>
-            <Box  
-            bg={"#DADADA"}
-            px={"$6"}
-            py={"$3"}
-            rounded={"$full"}>
-                        
-              <Text color={"$secondary600"} >PAST EVENT</Text>       
-                        
-            </Box>
-                    
-                    
-          </HStack>
+              <Pressable onPress={() => handleUpcomingPress()} rounded={"$full"} bg={"$white"} px={"$6"} py={"$3"}>
+                <Text color={"#B80000"}>UPCOMING</Text>
+              </Pressable>
+              <Pressable onPress={() => handlePastEventPress()} rounded={"$full"} bg={"#DADADA"} px={"$6"} py={"$3"}>
+                <Text color={"$secondary600"}>PAST EVENT</Text>
+              </Pressable>
+        </HStack>
         </Box>
      
         
