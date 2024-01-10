@@ -1,3 +1,7 @@
+// -	Mengimpor berbagai komponen dan pustaka yang diperlukan dari React, React Native, dan Firebase.
+// -	Mendeklarasikan beberapa variabel state menggunakan useState, termasuk pressedEventCardId, 
+//    image, uploading, uploaded Images, dan certificatesCount
+
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, } from "react-native";
 import { ScrollView, Text, View, Button, ButtonText  } from "@gluestack-ui/themed";
@@ -10,14 +14,25 @@ import * as MediaLibrary from 'expo-media-library';
 import firebase from "./config/FIREBASE";
 import 'firebase/compat/storage';
 
+// 	Deklarasi dan Penggunaan State
 const Sertifikat = () => {
+  // -	pressedEventCardId, digunakan untuk mengetahui event card mana yang sedang ditekan, 
+  //    dan kemudian digunakan dalam pengaturan antarmuka pengguna atau logika lainnya.
   const [pressedEventCardId, setPressedEventCardId] = useState(null);
+  // -	Image, digunakan untuk menampilkan gambar yang dipilih di antarmuka pengguna atau untuk mengunggah gambar ke Firebase Storage
   const [image, setImage] = useState(null);
+  // -	Uploading, untuk memberikan umpan balik visual kepada pengguna selama proses pengunggahan sedang berlangsung.
   const [uploading, setUploading] = useState(false);
+  // -	uploadedImages, digunakan untuk menampilkan daftar gambar sertifikat yang telah diunggah oleh pengguna.
   const [uploadedImages, setUploadedImages] = useState([]);
-  const [certificatesCount, setCertificatesCount] = useState(9);
+  //-	certificatesCount, digunakan untuk menampilkan informasi kepada pengguna tentang berapa banyak sertifikat yang telah dikumpulkan.
+  const [certificatesCount, setCertificatesCount] = useState([]);
 
-    // Fungsi untuk menghitung jumlah file gambar dalam Firebase Storage
+    // Fungsi untuk menghitung jumlah file gambar dalam Firebase Storage (Fungsi countImagesInStorage)
+    // -	Membuat fungsi asynchronous countImagesInStorage untuk menghitung jumlah file gambar dalam Firebase Storage.
+   // Menggunakan API Firebase Storage untuk mendapatkan daftar file dan melakukan filter berdasarkan ekstensi gambar.
+  // Menghitung jumlah file gambar yang valid dan mengembalikan nilai tersebut.
+
     const countImagesInStorage = async () => {
       try {
         const storageRef = firebase.storage().ref();
@@ -41,12 +56,21 @@ const Sertifikat = () => {
         return 0;
       }
   };
-  
+    // kemudian membuat Effect Hook untuk Menginisialisasi Jumlah Sertifikat
+    // -	Menggunakan useEffect untuk memanggil fungsi countImagesInStorage saat komponen pertama kali dimuat.
+   // Mengupdate state certificatesCount dengan nilai jumlah file gambar yang ada di Firebase Storage
+
     useEffect(() => {
       countImagesInStorage().then((imageCount) => {
         setCertificatesCount(imageCount);
       });
     }, []);
+
+
+  // membuat fungsi Fungsi pickImage
+  // -	Membuat fungsi asynchronous pickImage untuk membuka galeri dan memilih gambar.
+  // Menggunakan ImagePicker dari Expo untuk memilih gambar dari galeri perangkat.
+   // Mengupdate state image dengan URI gambar yang dipilih.
 
   const pickImage = async () => {
     // no permission
@@ -62,10 +86,14 @@ const Sertifikat = () => {
     }
   };
 
-  // Function to upload media files
+  // membuat function upload media
+  // -	Membuat fungsi asynchronous uploadMedia untuk mengunggah gambar ke Firebase Storage
+   // -	Menggunakan FileSystem dari Expo untuk mendapatkan informasi tentang file gambar yang akan diunggah.
+  // -	Mengonversi file gambar ke bentuk blob dan mengunggahnya ke Firebase Storage
+  // -	Menampilkan pesan pemberitahuan setelah berhasil mengunggah dan mengatur ulang state image
+
   const uploadMedia = async () => {
     setUploading(true);
-
     try {
       const { uri } = await FileSystem.getInfoAsync(image);
       const blob = await new Promise((resolve, reject) => {
@@ -94,7 +122,11 @@ const Sertifikat = () => {
     }
   };
 
-  // Fungsi untuk mengambil gambar dari Firebase Storage
+  // Fungsi untuk mengambil gambar dari Firebase Storage ( membuat Fungsi fetchImagesFromFirebase)
+  // -	Membuat fungsi asynchronous fetchImagesFromFirebase untuk mengambil daftar gambar dari Firebase Storage.
+  // Menggunakan API Firebase Storage untuk mendapatkan daftar referensi gambar.
+  // Mengambil URL download untuk setiap gambar dan mengupdate state uploadedImages dengan daftar URL tersebut.
+
   const fetchImagesFromFirebase = async () => {
     try {
       const imageRefs = await firebase.storage().ref().listAll();
@@ -107,11 +139,17 @@ const Sertifikat = () => {
       console.error(error);
     }
   };
-
+  
+  // kemudian membuat Effect Hook untuk Mengambil Gambar dari Firebase Storage
+  // -	Menggunakan useEffect untuk memanggil fungsi fetchImagesFromFirebase saat komponen pertama kali dimuat
   useEffect(() => {
     fetchImagesFromFirebase(); // Memanggil fungsi saat komponen dimuat pertama kali
   }, []); // Penambahan dependensi kosong untuk memastikan hanya dipanggil sekali
 
+
+  // membuat fungsi Fungsi handleDownload
+  // -	Membuat fungsi asynchronous handleDownload untuk mengunduh dan menyimpan gambar sertifikat ke galeri perangkat
+  // -	Menggunakan FileSystem dan MediaLibrary dari Expo untuk mengelola proses pengunduhan dan penyimpanan
   const handleDownload = async (imageUri) => {
     try {
       const downloadResumable = FileSystem.createDownloadResumable(
